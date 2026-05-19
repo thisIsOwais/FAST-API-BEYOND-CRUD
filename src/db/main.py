@@ -11,10 +11,15 @@ a simple test statement.
 from sqlmodel import SQLModel
 
 # Import AsyncEngine type for wrapping the created engine to async usage.
-from sqlalchemy.ext.asyncio import create_async_engine
+from sqlalchemy.ext.asyncio import async_session, create_async_engine
 
 # Import configuration values (DATABASE_URL) from project config.
 from src.config import Config
+
+
+
+from sqlmodel.ext.asyncio.session import AsyncSession
+from sqlalchemy.orm import sessionmaker
 
 
 # Build an AsyncEngine by first creating a standard engine with SQLModel's
@@ -45,3 +50,15 @@ async def initdb():
 
         # Print the Result object (not the rows) for debugging purposes.
         # print(result)
+
+
+... # rest of main.py
+
+async def get_session() -> AsyncSession:
+    """Dependency to provide the session object"""
+    async_session = sessionmaker(
+    bind= engine, class_=AsyncSession, expire_on_commit=False
+    )
+
+    async with async_session() as session:
+        yield session

@@ -1,6 +1,8 @@
+from pydantic import BaseModel
 from sqlmodel import SQLModel, Field, Column
 import sqlalchemy.dialects.postgresql as pg
 import uuid
+from datetime import datetime
 
 class Book(SQLModel , table=True):
     __tablename__ = "books"
@@ -25,3 +27,5 @@ class Book(SQLModel , table=True):
 
     def __repr__(self) -> str:
         return f"<Book {self.title}>"
+    
+    ...
