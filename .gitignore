@@ -1,4 +1,4 @@
 .env
 env/
 *.pyc
-*_pycache_s
+*_pycache_
