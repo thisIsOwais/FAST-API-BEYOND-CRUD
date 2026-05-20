@@ -32,10 +32,9 @@ from datetime import datetime
 
 import uuid
 from datetime import datetime
-from sqlmodel import SQLModel, Field
-from sqlalchemy import Column
+from sqlmodel import SQLModel, Field, Column
 import sqlalchemy.dialects.postgresql as pg
-from datetime import datetime   
+ 
 
 class Book(SQLModel, table=True):
     __tablename__ = "books"
