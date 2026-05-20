@@ -38,15 +38,17 @@ async def initdb():
     """create our database models in the database"""
     # Begin an asynchronous transaction/context-managed connection.
     async with engine.begin() as conn:
+        
+
         # Create a textual SQL statement to test the connection.
         # statement = text("select 'Hello World'")
 
         # Execute the statement asynchronously and await the Result.
         # result = await conn.execute(statement)
         
-       await conn.run_sync(SQLModel.metadata.create_all)
+        await conn.run_sync(SQLModel.metadata.create_all)
 
-       print("Database initialized successfully.")
+        print("Database initialized successfully.")
 
         # Print the Result object (not the rows) for debugging purposes.
         # print(result)
