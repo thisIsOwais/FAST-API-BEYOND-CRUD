@@ -8,14 +8,20 @@ class UserCreateModel(BaseModel):
     last_name:  str =Field(max_length=25)
     username: str = Field(max_length=8)
     email: str = Field(max_length=40)
-    password: str  = Field(min_length=6)
+    password: str  = Field(min_length=4,max_length=100)
 
-class UserLoginModel(BaseModel):
+class UserRegisterModel(BaseModel):
     uid: uuid.UUID
     first_name: str =Field(max_length=25)
     last_name:  str =Field(max_length=25)
     username: str = Field(max_length=8)
+    is_verified: bool 
+    email: str = Field(max_length=40)
+    password_hash: str  = Field(min_length=4, max_length=100)
+    created_at: datetime = Field(default_factory=datetime.now)
+    updated_at: datetime = Field(default_factory=datetime.now)  
+
+
+class UserLoginModel(BaseModel):
     email: str = Field(max_length=40)
     password: str  = Field(min_length=6)
-    created_at: datetime 
-    updated_at: datetime

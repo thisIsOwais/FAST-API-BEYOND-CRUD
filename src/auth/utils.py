@@ -4,19 +4,38 @@ from datetime import datetime, timedelta
 import jwt
 import logging
 import uuid
+from passlib.hash import bcrypt
 
+# passwd_context = CryptContext(
+#     schemes=['bcrypt']
+# )
 
-passwd_context = CryptContext(
-    schemes=['bcrypt']
+# def generate_password_hash(password: str) -> str:
+#     print("password is.........",password)
+#     print(len(password))
+#     # hash = passwd_context.hash(password)
+#     hash = bcrypt.using(rounds=13).hash("password")
+#     return hash
+
+# def verify_password(password: str, hash: str) -> bool:
+#     # return passwd_context.verify(password, hash)
+#     return bcrypt.verify(password, hash)
+
+# Create password hashing context
+pwd_context = CryptContext(
+    schemes=["bcrypt"],
+    deprecated="auto"
 )
 
+# Hash password
 def generate_password_hash(password: str) -> str:
-    hash = passwd_context.hash(password)
-    return hash
+    print("password is.........", password)
+    print(len(password))
+    return pwd_context.hash(password)
 
-def verify_password(password: str, hash: str) -> bool:
-    return passwd_context.verify(password, hash)
-
+# Verify password
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
 
 
 

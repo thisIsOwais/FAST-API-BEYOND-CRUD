@@ -23,10 +23,12 @@ class User(SQLModel, table=True):
     username: str
     first_name: str = Field(nullable=True)
     last_name: str = Field(nullable=True)
+    username: str = Field(min_length=2, max_length=14, unique=True)
     is_verified: bool = False
     email: str
     password_hash: str
-    created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=func.now))
+    created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=func.now()))
+    updated_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=func.now(), onupdate=func.now()))
 
     def __repr__(self) -> str:
         return f"<User {self.username}>"
