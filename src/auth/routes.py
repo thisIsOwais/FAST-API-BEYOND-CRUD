@@ -7,7 +7,7 @@ from src.auth.utils import create_access_token, verify_password
 from src.db.main import get_session
 from typing import List
 from .service import UserService
-
+from datetime import timedelta
 
 auth_router = APIRouter()
 user_service = UserService()
@@ -52,7 +52,7 @@ async def login_users(
             refresh_token = create_access_token(
                 user_data={"email": user.email, "user_uid": str(user.uid)},
                 refresh=True,
-                expiry=timedelta(days=REFRESH_TOKEN_EXPIRY),
+                expiry=timedelta(days=7),
             )
 
             return JSONResponse(
