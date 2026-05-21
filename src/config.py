@@ -6,6 +6,13 @@ class Settings(BaseSettings):
     DATABASE_URL: str 
     JWT_SECRET:str
     JWT_ALGORITHM:str
+    REDIS_HOST:str
+    REDIS_PORT:int
+    REDIS_DECODE_RESPONSES:bool
+    REDIS_USERNAME:str      
+    REDIS_PASSWORD:str
+
+
 
 
     model_config = SettingsConfigDict(
