@@ -50,10 +50,11 @@ class TokenBearer(HTTPBearer):
 
     async def __call__(self, request: Request) -> HTTPAuthorizationCredentials | None:
         creds = await super().__call__(request)
-
+     
         token = creds.credentials
 
         token_data = decode_token(token)
+  
 
         if await token_in_blocklist(token_data['jti']):
             raise HTTPException(
@@ -89,6 +90,7 @@ class TokenBearer(HTTPBearer):
 class AccessTokenBearer(TokenBearer):
 
     def verify_token_data(self, token_data: dict) -> None:
+       
         if token_data and token_data["refresh"]:
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,

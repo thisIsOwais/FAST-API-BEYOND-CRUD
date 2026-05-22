@@ -12,6 +12,7 @@ book_router = APIRouter()
 book_service = BookService()
 access_token_bearer = AccessTokenBearer()
 
+
 @book_router.get("/", response_model=List[Book])
 async def get_all_books(session: AsyncSession = Depends(get_session), token_details=Depends(access_token_bearer)
                         ):
@@ -24,7 +25,6 @@ async def create_a_book(
     book_data: BookCreateModel, session: AsyncSession = Depends(get_session), token_details=Depends(access_token_bearer)
 ) -> dict:
     new_book = await book_service.create_book(book_data, session)
-    print(new_book)
     return new_book
 
 

@@ -26,8 +26,11 @@ JTI_EXPIRY = 3600
 token_blocklist = redis.Redis(
     host=Config.REDIS_HOST,
     port=Config.REDIS_PORT,
-    db=0
+    password=Config.REDIS_PASSWORD,
+    username=Config.REDIS_USERNAME,
+    decode_responses=True
 )
+
 
 
 async def add_jti_to_blocklist(jti: str) -> None:
@@ -40,5 +43,4 @@ async def add_jti_to_blocklist(jti: str) -> None:
 
 async def token_in_blocklist(jti: str) -> bool:
     jti_entry = await token_blocklist.get(jti)
-
     return jti_entry is not None

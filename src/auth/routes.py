@@ -87,7 +87,7 @@ async def get_new_access_token(token_details: dict = Depends(RefreshTokenBearer(
 
 @auth_router.get('/logout')
 async def revoke_token(token_details:dict=Depends(AccessTokenBearer())):
-
+    print("token details in logout route is.........",token_details)
     jti = token_details['jti']
 
     await add_jti_to_blocklist(jti)

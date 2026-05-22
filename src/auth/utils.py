@@ -29,8 +29,6 @@ pwd_context = CryptContext(
 
 # Hash password
 def generate_password_hash(password: str) -> str:
-    print("password is.........", password)
-    print(len(password))
     return pwd_context.hash(password)
 
 # Verify password
@@ -61,6 +59,7 @@ def decode_token(token: str) -> dict:
     try:
         token_data = jwt.decode(
             jwt=token,
+            key=Config.JWT_SECRET,
             algorithms=[Config.JWT_ALGORITHM]
         )
 
