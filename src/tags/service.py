@@ -4,9 +4,9 @@ from sqlmodel import desc, select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 from src.books.service import BookService
-from src.db.models import Tag
+from .schema import Tag
 
-from .schemas import TagAddModel, TagCreateModel
+from .models import TagAddModel, TagCreateModel
 
 book_service = BookService()
 
