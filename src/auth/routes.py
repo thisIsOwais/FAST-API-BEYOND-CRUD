@@ -1,7 +1,7 @@
 from fastapi import APIRouter, status, Depends
 from fastapi.exceptions import HTTPException
 from fastapi.responses import JSONResponse
-from src.auth.model import UserLoginModel, UserRegisterModel, UserCreateModel
+from src.auth.model import UserLoginModel, UserRegisterModel, UserCreateModel, UserBooksModel
 from sqlmodel.ext.asyncio.session import AsyncSession
 from src.auth.utils import create_access_token, verify_password
 from src.db.main import get_session
@@ -100,6 +100,6 @@ async def revoke_token(token_details:dict=Depends(AccessTokenBearer())):
         status_code=status.HTTP_200_OK
     )
 
-@auth_router.get("/me", response_model=UserRegisterModel, dependencies=[Depends(role_checker)])
+@auth_router.get("/me", response_model=UserBooksModel, dependencies=[Depends(role_checker)])
 async def get_current_user_me(user=Depends(get_current_user), _: bool = Depends(role_checker)):
     return user

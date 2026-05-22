@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from sqlmodel import SQLModel, Field, Column
+from sqlmodel import Relationship, SQLModel, Field, Column
 import sqlalchemy.dialects.postgresql as pg
 import uuid
 from datetime import datetime
@@ -36,6 +36,8 @@ from sqlmodel import SQLModel, Field, Column
 import sqlalchemy.dialects.postgresql as pg
 from typing import Optional
 
+from src.auth.schema import User
+
  
 
 class Book(SQLModel, table=True):
@@ -67,6 +69,8 @@ class Book(SQLModel, table=True):
         default_factory=datetime.now,
         sa_column=Column(pg.TIMESTAMP)
     )
+
+    user: Optional[User] = Relationship(back_populates="books")
 
     def __repr__(self):
         return f"<Book {self.title}>"

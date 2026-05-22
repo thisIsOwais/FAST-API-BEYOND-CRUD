@@ -1,6 +1,8 @@
 from pydantic import BaseModel, Field
 import uuid 
 from datetime import datetime
+from src.books.model import BookModel as Book
+from typing import List, Optional
 
 
 class UserCreateModel(BaseModel):
@@ -26,3 +28,6 @@ class UserRegisterModel(BaseModel):
 class UserLoginModel(BaseModel):
     email: str = Field(max_length=40)
     password: str  = Field(min_length=4, max_length=100)
+
+class UserBooksModel(UserRegisterModel):
+    books: List["Book"]

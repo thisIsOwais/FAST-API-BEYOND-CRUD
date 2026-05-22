@@ -1,8 +1,14 @@
-from sqlmodel import SQLModel, Field, Column
+from typing import List
+
+from sqlmodel import Relationship, SQLModel, Field, Column
 import sqlalchemy.dialects.postgresql as pg
 import uuid
 from datetime import datetime
 from sqlalchemy import func
+
+# from src.books.schema import Book
+
+from src.books.schema import Book
 
 
 class User(SQLModel, table=True):
@@ -34,5 +40,13 @@ class User(SQLModel, table=True):
     created_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=func.now()))
     updated_at: datetime = Field(sa_column=Column(pg.TIMESTAMP, default=func.now(), onupdate=func.now()))
 
+    books: List["Book"] = Relationship(
+        back_populates="user", sa_relationship_kwargs={"lazy": "selectin"}
+    )
+
+
     def __repr__(self) -> str:
         return f"<User {self.username}>"
+    
+    # def func():
+    #     from src.books.schema import Book
