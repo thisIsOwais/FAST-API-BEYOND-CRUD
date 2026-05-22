@@ -101,7 +101,5 @@ async def revoke_token(token_details:dict=Depends(AccessTokenBearer())):
     )
 
 @auth_router.get("/me", response_model=UserRegisterModel, dependencies=[Depends(role_checker)])
-async def get_current_user(user=Depends(get_current_user), _: bool = Depends(role_checker)):
-    print("current user in me route is.........",user)
-
+async def get_current_user_me(user=Depends(get_current_user), _: bool = Depends(role_checker)):
     return user

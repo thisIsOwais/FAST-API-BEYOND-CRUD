@@ -6,7 +6,7 @@ from sqlalchemy import func
 
 
 class User(SQLModel, table=True):
-    __tablename__ = "user_accounts"
+    __tablename__ = "users"
 
     uid: uuid.UUID = Field(
         default_factory=uuid.uuid4,
