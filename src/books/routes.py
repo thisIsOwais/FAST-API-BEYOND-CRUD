@@ -26,7 +26,9 @@ async def get_all_books(session: AsyncSession = Depends(get_session), token_deta
 async def create_a_book(
     book_data: BookCreateModel, session: AsyncSession = Depends(get_session), token_details=Depends(access_token_bearer)
 ) -> dict:
-    new_book = await book_service.create_book(book_data, session)
+    user_id= token_details.get("user")["user_uid"]
+    new_book = await book_service.create_book(book_data, user_id, session)
+    print("new book is.........",new_book)
     return new_book
 
 

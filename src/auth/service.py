@@ -9,9 +9,10 @@ from src.db.main import get_session
 class UserService:
     async def get_user_by_email(self, email: str, session: AsyncSession):
         statement = select(User).where(User.email == email)
-
+        print("email in service is.........",email)
         result = await session.exec(statement)
-
+        # print("result is.........",result.all())
+        # print("result are.........",result.mappings.all())
         user = result.first()
         print("queried user is.........",user)
         return user

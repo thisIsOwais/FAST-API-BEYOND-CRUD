@@ -135,6 +135,8 @@ class RoleChecker:
 
     def __call__(self, current_user: User = Depends(get_current_user)) -> Any:
         if current_user.role in self.allowed_roles:
+            print(f"User role {current_user.role} is allowed to access this resource.")
+            print(f"User role {self.allowed_roles} are allowed to access this resource.")
             return True
 
         raise HTTPException(
