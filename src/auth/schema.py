@@ -8,7 +8,7 @@ from sqlalchemy import func
 
 # from src.books.schema import Book
 
-from src.books.schema import Book
+# from src.books.schema import Book
 
 
 class User(SQLModel, table=True):
@@ -48,5 +48,5 @@ class User(SQLModel, table=True):
     def __repr__(self) -> str:
         return f"<User {self.username}>"
     
-    # def func():
-    #     from src.books.schema import Book
+    def func():
+        from src.books.schema import Book

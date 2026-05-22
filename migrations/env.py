@@ -11,6 +11,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 from src.auth.schema import User
 from src.books.schema import Book
+from src.reviews.schema import Review
 from sqlmodel import SQLModel
 from src.config import Config
 
