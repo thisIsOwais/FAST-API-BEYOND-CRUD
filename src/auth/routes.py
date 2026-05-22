@@ -8,12 +8,13 @@ from src.db.main import get_session
 from typing import List
 from .service import UserService
 from datetime import timedelta, datetime
-from src.auth.dependencies import AccessTokenBearer, RefreshTokenBearer
+from src.auth.dependencies import AccessTokenBearer,RefreshTokenBearer,RoleChecker,get_current_user
 from src.db.redis import add_jti_to_blocklist
 
 
 auth_router = APIRouter()
 user_service = UserService()
+role_checker = RoleChecker(["admin"])
 
 
 @auth_router.post("/register", status_code=status.HTTP_201_CREATED, response_model=UserRegisterModel)
@@ -98,3 +99,9 @@ async def revoke_token(token_details:dict=Depends(AccessTokenBearer())):
         },
         status_code=status.HTTP_200_OK
     )
+
+@auth_router.get("/me", response_model=UserRegisterModel, dependencies=[Depends(role_checker)])
+async def get_current_user(user=Depends(get_current_user), _: bool = Depends(role_checker)):
+    print("current user in me route is.........",user)
+
+    return user

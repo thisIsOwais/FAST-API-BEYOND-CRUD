@@ -15,6 +15,7 @@ class UserRegisterModel(BaseModel):
     first_name: str =Field(max_length=25)
     last_name:  str =Field(max_length=25)
     username: str = Field(max_length=8)
+    role: str
     is_verified: bool 
     email: str = Field(max_length=40)
     password_hash: str  = Field(min_length=4, max_length=100)

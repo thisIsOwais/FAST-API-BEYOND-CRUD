@@ -3,6 +3,8 @@ from .model import UserCreateModel
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import select
 from .utils import generate_password_hash, verify_password
+from src.db.main import get_session
+
 
 class UserService:
     async def get_user_by_email(self, email: str, session: AsyncSession):
@@ -11,7 +13,7 @@ class UserService:
         result = await session.exec(statement)
 
         user = result.first()
-
+        print("queried user is.........",user)
         return user
 
     async def user_exists(self, email, session: AsyncSession):
@@ -32,3 +34,4 @@ class UserService:
 
         print("new user after commit is.........",new_user)
         return new_user
+    

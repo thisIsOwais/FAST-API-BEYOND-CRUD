@@ -24,6 +24,10 @@ class User(SQLModel, table=True):
     first_name: str = Field(nullable=True)
     last_name: str = Field(nullable=True)
     username: str = Field(min_length=2, max_length=14, unique=True)
+    
+    role: str = Field(
+        sa_column=Column(pg.VARCHAR, nullable=False, server_default="user")
+    ) 
     is_verified: bool = False
     email: str
     password_hash: str
