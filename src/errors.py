@@ -1,8 +1,8 @@
 from typing import Any
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-from __init__ import app
 from fastapi import status
+from fastapi import callable, Exception
 
 
 class BooklyException(Exception):
