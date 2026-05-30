@@ -31,3 +31,6 @@ class UserLoginModel(BaseModel):
 
 class UserBooksModel(UserRegisterModel):
     books: List["Book"]
+
+class EmailModel(BaseModel):
+    addresses : List[str]

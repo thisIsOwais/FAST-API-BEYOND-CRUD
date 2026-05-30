@@ -10,7 +10,9 @@ from .service import UserService
 from datetime import timedelta, datetime
 from src.auth.dependencies import AccessTokenBearer,RefreshTokenBearer,RoleChecker,get_current_user
 from src.db.redis import add_jti_to_blocklist
-
+from src.mail import mail, create_message
+from src.celery_tasks import send_email
+from src.auth.model import EmailModel
 
 auth_router = APIRouter()
 user_service = UserService()
