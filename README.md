@@ -238,7 +238,3 @@ This repository is both a learning playground (top-level `main.py` demonstrates 
 
 ---
 
-If you'd like, I can:
-- create a PR adding this `README.md` to the repo,
-- generate a recommended `requirements.txt` with pinned versions,
-- or produce a quick-start `.env.example` and Alembic instructions tailored to Postgres.
